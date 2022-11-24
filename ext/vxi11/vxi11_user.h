@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <rpc/rpc.h>
 #include "vxi11.h"
@@ -40,7 +41,9 @@
 					 * times out ON THE INSTRUMENT (and so we have
 					 * to resend the query again) */
 #define	VXI11_NULL_WRITE_RESP	51	/* vxi11_send() return value if a sent command
-					 * times out ON THE INSTURMENT. */
+					 * times out ON THE INSTRUMENT. */
+#define READ_WRITE_RETRIES_COUNT 10     /* maximum number of retries for
+                                         * vxi11_send/receive until giving up */
 
 struct	CLINK {
 	VXI11_CLIENT	*client;
